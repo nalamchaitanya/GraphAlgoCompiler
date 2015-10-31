@@ -5,7 +5,7 @@ function main()
 {
 	readGraph();
 	Node u,v,w;
-	int contn,wt;
+	int contn,wt,i,j;
 	foreach node u
 	{
 		u.dist=999999999;
@@ -16,9 +16,9 @@ function main()
 	while(contn==1)
 	{
 		contn=0;
-		foreach node u
+		foreach node u : i
 		{
-			foreach edge u to v
+			foreach edge u to v : j
 			{
 				wt=weight(u,v);
 				if(u.dist+wt<v.dist)

@@ -5,13 +5,16 @@ SH = bash
 CFLAGS = -g
 LDFLAGS = -lm
 
-a.out: lex.yy.c y.tab.o Graph.o
+a.out: lex.yy.c y.tab.o Graph.o Interpreter.o
 	gcc -lm $^ -o $@
 
 y.tab.o: y.tab.c y.tab.h
 	gcc -c $(CFLAGS) $< -o $@
 
 Graph.o: Graph.c Graph.h
+	gcc -c $(CFLAGS) $< -o $@
+
+Interpreter.o: Interpreter.c Interpreter.h
 	gcc -c $(CFLAGS) $< -o $@
 
 y.tab.c: a4.y

@@ -5,6 +5,7 @@ digit   [0-9]
     #include <stdio.h>
     #include <stdlib.h>
     #include <string.h>
+    #include "Interpreter.h"
     #include "Graph.h"
     #include "y.tab.h"
     extern YYSTYPE yylval;
@@ -55,7 +56,9 @@ digit   [0-9]
 
 [#]([^\n])*[\n]  {;}
 
-[\.();,{}+-*/]    {return *yytext;}
+("+"|"-"|"*"|"/"|"{"|"}")   {return *yytext;}
+
+[\.();,]    {return *yytext;}
 
 [ \t\n\r]   {return *yytext;}
 

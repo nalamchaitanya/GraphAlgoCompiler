@@ -28,6 +28,14 @@ typedef struct _Context
 char* outInit();
 
 // Gives tabs.
-char* giveTabs();
+char* giveTabs(int tabCount);
 
+// forNodeClause
+char* forNodeClause(char* var1,char* var2);
+
+// forEdgeClause
+char* forEdgeClause(char* var1,char* var2,char* var3);
+
+// readGraphClause
+char* readGraphClause(int tabCount);
 #endif
