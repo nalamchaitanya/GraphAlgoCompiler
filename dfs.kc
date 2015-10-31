@@ -1,13 +1,14 @@
 #dfs implementation
 
 #DFS function.
-function DFS(int n,int num)
+function DFS(Node u,int num)
 {
 	Node u,v;
+	int i;
 	u.dfsnum = num;
 	printLn u.dfsnum;
 	print "String has to be printed.";
-	foreach edge u to v
+	foreach edge u to v : i
 	{
 		if(v.dfsnum==0)
 		{
@@ -18,10 +19,11 @@ function DFS(int n,int num)
 }
 
 #main function.
-function main()
+function main(int argc)
 {
 	Node u;
-	foreach node u
+	int i;
+	foreach node u : i
 	{
 		u.dfsnum = 0;
 	}

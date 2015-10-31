@@ -6,7 +6,7 @@ function main()
 	readGraph();
 	Node u,v,w;
 	int contn,wt,i,j;
-	foreach node u
+	foreach node u : i
 	{
 		u.dist=999999999;
 	}
@@ -29,7 +29,7 @@ function main()
 			}
 		}
 	}
-	foreach node u
+	foreach node u : i
 	{
 		printLn u.dist;
 	}

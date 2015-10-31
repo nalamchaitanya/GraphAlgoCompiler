@@ -32,7 +32,7 @@ digit   [0-9]
 
 ("printLn")     {return PRINTLN;}
 
-("dist"|"dfsnum"|"avail"|"name")      {return ATTR;}
+("dist"|"dfsnum"|"avail"|"name")      {yylval.string = strdup(yytext);return ATTR;}
 
 ("while")   {return WHILE;}
 
@@ -54,13 +54,13 @@ digit   [0-9]
 
 ({letter}({letter}|{digit})*)   {yylval.string = strdup(yytext);return VARIABLE;}
 
-[#]([^\n])*[\n]  {;}
+[#]([^\n])*[\n]  {printf("%s",yytext);}
 
 ("+"|"-"|"*"|"/"|"{"|"}")   {return *yytext;}
 
-[\.();,]    {return *yytext;}
+[\.();:=,]    {return *yytext;}
 
-[ \t\n\r]   {return *yytext;}
+[ \t\n\r]   {;}
 
 .       {yyerror();}
 
