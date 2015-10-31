@@ -1,7 +1,7 @@
 #sssp implementation.
 
 #function main.
-function main()
+function main(int argc)
 {
 	readGraph();
 	Node u,v,w;
@@ -10,7 +10,7 @@ function main()
 	{
 		u.dist=999999999;
 	}
-	w=0;
+	w=getNode(0);
 	w.dist=0;
 	contn=1;
 	while(contn==1)

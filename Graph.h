@@ -35,7 +35,7 @@ typedef struct _Graph
 Graph* createGraph(char* file);
 
 //Gets a node for given name
-GNode* getNode(char* name,Graph* graph);
+GNode* getNode(int name);
 
 //Add a new Node to graph
 void addEdge(GNode* node1,GNode* node2,Graph* graph,int wt);
@@ -59,6 +59,6 @@ int isRelation(Graph *graph,char *name1,char *name2);
 char* constructStr(char *name1,char *relation,char *name2);
 
 // gives weight between two nodes having edge.
-int weight(int src,int dst,Graph *grp);
+int weight(GNode *src,GNode *dst);
 
 #endif

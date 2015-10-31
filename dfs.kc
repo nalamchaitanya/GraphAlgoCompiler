@@ -3,11 +3,11 @@
 #DFS function.
 function DFS(Node u,int num)
 {
-	Node u,v;
+	Node v;
 	int i;
 	u.dfsnum = num;
 	printLn u.dfsnum;
-	print "String has to be printed.";
+	# print "String has to be printed.";
 	foreach edge u to v : i
 	{
 		if(v.dfsnum==0)
@@ -23,9 +23,11 @@ function main(int argc)
 {
 	Node u;
 	int i;
+	readGraph();
 	foreach node u : i
 	{
 		u.dfsnum = 0;
 	}
-	DFS(0,1);
+	u=getNode(0);
+	DFS(u,1);
 }

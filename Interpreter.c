@@ -6,9 +6,10 @@
 // Initial Output.
 char* outInit()
 {
-	char *temp =(char*)malloc(sizeof(char)*1000);
+	char *temp =(char*)malloc(sizeof(char)*100);
 	*temp='\0';
 	strcat(temp,"#include <stdio.h>\n#include \"Graph.h\"\n\n");
+	strcat(temp,"Graph *graph;\n\n");
 	return temp;
 }
 

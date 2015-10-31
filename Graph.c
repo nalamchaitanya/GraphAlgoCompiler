@@ -3,6 +3,8 @@
 #include <string.h>
 #include "Graph.h"
 
+extern Graph *graph;
+
 //Creates a new Graph.
 Graph* createGraph(char* file)
 {
@@ -63,13 +65,19 @@ void print(Graph *graph)
 }
 
 // gives weight between two nodes having edge.
-int weight(int src,int dst,Graph *graph)
+int weight(GNode *src,GNode *dst)
 {
 	int i,j;
-	for(i=0;i<graph->arr[src].length;i++)
+	for(i=0;i<src->length;i++)
 	{
-		if(dst==graph->arr[src].neighbours[i]->name)
-			return graph->arr[src].weights[i];
+		if(dst->name==src->neighbours[i]->name)
+			return src->weights[i];
 	}
 	return -1;
+}
+
+//Gets a node for given name
+GNode* getNode(int name)
+{
+	return graph->arr+name;
 }

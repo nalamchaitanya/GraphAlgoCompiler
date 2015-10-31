@@ -9,6 +9,8 @@
     extern FILE *yyin;
     extern FILE *yyout;
     char *str;
+    Graph *graph;
+    int nflag;
     int tabCount;
 %}
 
@@ -72,7 +74,6 @@ fdecl:
                                                 strcat(temp,")\n");
                                                 $$=temp;
                                             }
-                                            printf("here\n");
                                         }
 
 params:
@@ -100,7 +101,7 @@ vdecl:
         | NODE VARIABLE                 {
                                             char *temp = (char*)malloc(sizeof(char)*20);
                                             *temp ='\0';
-                                            strcat(temp,"Node* ");
+                                            strcat(temp,"GNode ");
                                             strcat(temp,$2);
                                             $$=temp;
                                         }
@@ -117,21 +118,21 @@ statements:
         |                           {$$="";}
         ;
 statement:
-            INT varlist ';'             {
+            INT {nflag=0;} varlist ';'             {
                                             char *temp = (char*)malloc(sizeof(char)*20);
                                             *temp ='\0';
                                             strcat(temp,giveTabs(tabCount));
                                             strcat(temp,"int ");
-                                            strcat(temp,$2);
+                                            strcat(temp,$3);
                                             strcat(temp,";\n");
                                             $$=temp;
                                         }
-            | NODE varlist ';'          {
+            | NODE {nflag=1;} varlist ';'          {
                                             char* temp = (char*)malloc(sizeof(char)*20);
                                             *temp ='\0';
                                             strcat(temp,giveTabs(tabCount));
-                                            strcat(temp,"Node* ");
-                                            strcat(temp,$2);
+                                            strcat(temp,"GNode ");
+                                            strcat(temp,$3);
                                             strcat(temp,";\n");
                                             $$=temp;
                                         }
@@ -139,13 +140,10 @@ statement:
                                             char *temp = (char*)malloc(sizeof(char)*100);
                                             *temp ='\0';
                                             strcat(temp,giveTabs(tabCount));
-                                            printf("123:%s\n",temp);
                                             strcat(temp,$1);
-                                            printf("123:%s\n",temp);
                                             strcat(temp,"=");
                                             strcat(temp,$3);
                                             strcat(temp,";\n");
-                                            printf("123:%s\n",temp);
                                             $$=temp;
                                         }
             | FORNODE VARIABLE ':' VARIABLE {tabCount++;}'{' statements '}'{tabCount--;}  {
@@ -202,7 +200,7 @@ statement:
                                                 strcat(temp,"\n");
                                                 $$=temp;
                                             }
-            | READGRAPH '(' ')' ';'         {$$="Graph *graph = readGraph(argv[1]);\n";}
+            | READGRAPH '(' ')' ';'         {$$="\tgraph = createGraph(argv[1]);\n";}
             | VARIABLE '(' args ')' ';'     {
                                                 char *temp = (char*)malloc(sizeof(char)*30);
                                                 *temp ='\0';
@@ -245,13 +243,32 @@ varlist:
             VARIABLE ',' varlist    {
                                         char* temp = (char*)malloc(sizeof(char)*50);
                                         *temp='\0';
-                                        strcat(temp,$1);
-                                        strcat(temp,",");
-                                        strcat(temp,$3);
+                                        if(!nflag)
+                                        {
+                                            strcat(temp,$1);
+                                            strcat(temp,",");
+                                            strcat(temp,$3);
+                                        }
+                                        else
+                                        {
+                                            strcat(temp,"*");
+                                            strcat(temp,$1);
+                                            strcat(temp,",");
+                                            strcat(temp,$3);
+                                        }
                                         $$=temp;
                                     }
             | VARIABLE              {
-                                        $$=$1;
+                                        char* temp = (char*)malloc(sizeof(char)*50);
+                                        *temp='\0';
+                                        if(!nflag)
+                                            strcat(temp,$1);
+                                        else
+                                        {
+                                            strcat(temp,"*");
+                                            strcat(temp,$1);
+                                        }
+                                        $$=temp;
                                     }
             ;
 
@@ -274,7 +291,6 @@ lval:
 
 expr:
         E                       {
-                                    printf("%s\n",$1);
                                     $$=$1;
                                 }
 
@@ -380,7 +396,7 @@ printStmt:
     | PRINT STRING              {
                                     char* temp = (char*)malloc(sizeof(char)*100);
                                     *temp='\0';
-                                    strcat(temp,"printf(\"%s\",");
+                                    strcat(temp,"printf(");
                                     strcat(temp,$2);
                                     strcat(temp,");");
                                     $$=temp;
@@ -396,9 +412,9 @@ printStmt:
     | PRINTLN STRING            {
                                     char* temp = (char*)malloc(sizeof(char)*100);
                                     *temp='\0';
-                                    strcat(temp,"printf(\"%s\\n\",");
-                                    strcat(temp,$2);
-                                    strcat(temp,");");
+                                    strcat(temp,"printf(");
+                                    strcat(temp,strndup($2,strlen($2)-1));
+                                    strcat(temp,"\\n\");\n");
                                     $$=temp;
                                 }
     ;
