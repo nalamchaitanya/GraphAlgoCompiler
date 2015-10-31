@@ -24,17 +24,6 @@ Graph* createGraph(char* file)
 	graph->edges = m;
 	return graph;
 }
-//
-// //Gets a node for given name
-// GNode* getNode(char* name,Graph* graph)
-// {
-// 	GNode* node = checkInArray(graph,name);
-// 	if(node->name==NULL)
-// 	{
-// 		node = createNode(name,graph);
-// 	}
-// 	return node;
-// }
 
 //Add a new Edge to graph
 void addEdge(GNode* node1,GNode* node2,Graph* graph,int wt)
@@ -71,4 +60,16 @@ void print(Graph *graph)
 		printf("\n");
 	}
 	return;
+}
+
+// gives weight between two nodes having edge.
+int weight(int src,int dst,Graph *graph)
+{
+	int i,j;
+	for(i=0;i<graph->arr[src].length;i++)
+	{
+		if(dst==graph->arr[src].neighbours[i]->name)
+			return graph->arr[src].weights[i];
+	}
+	return -1;
 }

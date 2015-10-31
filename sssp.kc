@@ -1,0 +1,36 @@
+#sssp implementation.
+
+#function main.
+function main()
+{
+	readGraph();
+	Node u,v,w;
+	int contn,wt;
+	foreach node u
+	{
+		u.dist=999999999;
+	}
+	w=0;
+	w.dist=0;
+	contn=1;
+	while(contn==1)
+	{
+		contn=0;
+		foreach node u
+		{
+			foreach edge u to v
+			{
+				wt=weight(u,v);
+				if(u.dist+wt<v.dist)
+				{
+					v.dist=u.dist+wt;
+					contn=1;
+				}
+			}
+		}
+	}
+	foreach node u
+	{
+		printLn u.dist;
+	}
+}

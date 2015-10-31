@@ -13,7 +13,53 @@ digit   [0-9]
 %}
 
 %%
+("Graph")   {return GRAPH;}
 
+("Node")    {return NODE;}
+
+("int")     {return INT;}
+
+("foreach node") {return FORNODE;}
+
+("foreach edge")   {return FOREDGE;}
+
+("to")      {return TO;}
+
+("if")         {return IF;}
+
+("print")       {return PRINT;}
+
+("printLn")     {return PRINTLN;}
+
+("dist"|"dfsnum"|"avail"|"name")      {return ATTR;}
+
+("while")   {return WHILE;}
+
+("readGraph")   {return READGRAPH;}
+
+("function")    {return FUNCTION;}
+
+("<"|">"|"<="|">="|"=="|"!=")   {
+                                    yylval.string = strdup(yytext);
+                                    return COMP;
+                                }
+
+[\"]([^\n\t\r])*[\"]    {
+                            yylval.string = strdup(yytext);
+                            return STRING;
+                        }
+
+({digit}*)      {yylval.number = atoi(yytext);return NUMBER;}
+
+({letter}({letter}|{digit})*)   {yylval.string = strdup(yytext);return VARIABLE;}
+
+[#]([^\n])*[\n]  {;}
+
+[\.();,{}+-*/]    {return *yytext;}
+
+[ \t\n\r]   {return *yytext;}
+
+.       {yyerror();}
 
 %%
 

@@ -1,0 +1,29 @@
+#dfs implementation
+
+#DFS function.
+function DFS(int n,int num)
+{
+	Node u,v;
+	u.dfsnum = num;
+	printLn u.dfsnum;
+	print "String has to be printed.";
+	foreach edge u to v
+	{
+		if(v.dfsnum==0)
+		{
+			num=num+1;
+			DFS(v,num);
+		}
+	}
+}
+
+#main function.
+function main()
+{
+	Node u;
+	foreach node u
+	{
+		u.dfsnum = 0;
+	}
+	DFS(0,1);
+}

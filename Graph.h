@@ -8,6 +8,8 @@
 #ifndef GRAPH_H
 #define GRAPH_H
 
+#define LVAL 999999999
+
 typedef struct _GNode GNode;
 
 typedef struct _GNode
@@ -17,6 +19,9 @@ typedef struct _GNode
 	int* weights;
 	int length;
 	int check;
+	int dist;
+	int dfsnum;
+	int avail;
 }GNode;
 
 typedef struct _Graph
@@ -52,5 +57,8 @@ int isRelation(Graph *graph,char *name1,char *name2);
 
 // constructs string to put in table.
 char* constructStr(char *name1,char *relation,char *name2);
+
+// gives weight between two nodes having edge.
+int weight(int src,int dst,Graph *grp);
 
 #endif
