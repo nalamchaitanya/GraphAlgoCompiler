@@ -31,11 +31,15 @@ char* outInit();
 char* giveTabs(int tabCount);
 
 // forNodeClause
-char* forNodeClause(char* var1,char* var2);
+char* forNodeClause(char* var1,char* var2,int tabCount);
 
 // forEdgeClause
-char* forEdgeClause(char* var1,char* var2,char* var3);
+char* forEdgeClause(char* var1,char* var2,char* var3,int tabCount);
 
 // readGraphClause
 char* readGraphClause(int tabCount);
+
+// declaration of main.
+char* mainDecl();
+
 #endif
