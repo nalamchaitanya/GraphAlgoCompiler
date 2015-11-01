@@ -6,7 +6,7 @@ function DFS(Node u,int num)
 	Node v;
 	int i;
 	u.dfsnum = num;
-	printLn u.dfsnum;
+	printLn u.name;
 	# print "String has to be printed.";
 	foreach edge u to v : i
 	{

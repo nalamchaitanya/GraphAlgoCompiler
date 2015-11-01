@@ -101,7 +101,7 @@ vdecl:
         | NODE VARIABLE                 {
                                             char *temp = (char*)malloc(sizeof(char)*20);
                                             *temp ='\0';
-                                            strcat(temp,"GNode ");
+                                            strcat(temp,"GNode* ");
                                             strcat(temp,$2);
                                             $$=temp;
                                         }

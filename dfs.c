@@ -5,10 +5,10 @@ Graph *graph;
 
 void DFS(GNode* u,int num)
 {
-	GNode* v;
+	GNode *v;
 	int i;
 	u->dfsnum=num;
-	printf("%d\n",u->dfsnum);
+	printf("%d\n",u->name);
 	for(i=0;i<u->length;i++)
 	{
 		v=u->neighbours[i];
@@ -21,7 +21,7 @@ void DFS(GNode* u,int num)
 }
 void main(int argc,char** argv)
 {
-	GNode* u;
+	GNode *u;
 	int i;
 	graph = createGraph(argv[1]);
 	for(i=0;i<graph->nodes;i++)
