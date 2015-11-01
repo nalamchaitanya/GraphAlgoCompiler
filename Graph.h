@@ -61,4 +61,10 @@ char* constructStr(char *name1,char *relation,char *name2);
 // gives weight between two nodes having edge.
 int weight(int src,int dst,Graph *grp);
 
+// gives no of nodes in graph.
+int nodeCount();
+
+// gives no of edges in graph.
+int edgeCount();
+
 #endif

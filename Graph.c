@@ -73,3 +73,15 @@ int weight(int src,int dst,Graph *graph)
 	}
 	return -1;
 }
+
+// gives no of nodes in graph.
+int nodeCount()
+{
+	return graph->nodes;
+}
+
+// gives no of edges in graph.
+int edgeCount()
+{
+	return graph->edges;
+}

@@ -32,7 +32,7 @@ digit   [0-9]
 
 ("printLn")     {return PRINTLN;}
 
-("dist"|"dfsnum"|"avail"|"name")      {return ATTR;}
+("dist"|"dfsnum"|"avail"|"name"|"check"|"length")      {return ATTR;}
 
 ("while")   {return WHILE;}
 
