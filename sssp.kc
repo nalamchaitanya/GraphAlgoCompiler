@@ -31,6 +31,8 @@ function main(int argc)
 	}
 	foreach node u : i
 	{
+		print u.name;
+		print " ";
 		printLn u.dist;
 	}
 }

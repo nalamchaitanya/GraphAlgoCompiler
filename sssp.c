@@ -37,6 +37,8 @@ void main(int argc,char** argv)
 	for(i=0;i<graph->nodes;i++)
 	{
 		u=graph->arr+i;
+		printf("%d",u->name);
+		printf(" ");
 		printf("%d\n",u->dist);
 	}
 }
