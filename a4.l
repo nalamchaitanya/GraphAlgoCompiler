@@ -32,7 +32,7 @@ digit   [0-9]
 
 ("printLn")     {return PRINTLN;}
 
-("dist"|"dfsnum"|"avail"|"name"|"check"|"length")      {return ATTR;}
+("dist"|"dfsnum"|"avail"|"name"|"check"|"length")      {yylval.string = strdup(yytext);return ATTR;}
 
 ("while")   {return WHILE;}
 
@@ -58,9 +58,9 @@ digit   [0-9]
 
 ("+"|"-"|"*"|"/"|"{"|"}")   {return *yytext;}
 
-[\.();,]    {return *yytext;}
+[\.();:=,]    {return *yytext;}
 
-[ \t\n\r]   {return *yytext;}
+[ \t\n\r]   {;}
 
 .       {yyerror();}
 

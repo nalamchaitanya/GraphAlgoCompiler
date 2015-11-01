@@ -1,0 +1,46 @@
+#function main.
+
+function main(int argc)
+{
+	readGraph();
+	Node u,v,w,x;
+	int i,j,wt,k,min;
+	foreach node u : i
+	{
+		u.dist=999999999;
+		u.avail=1;
+	}
+	u=getNode(0);
+	u.dist=0;
+	foreach node x : i
+	{
+		min=999999999;
+		foreach node w : k
+		{
+			if(w.avail==1)
+			{
+				if(w.dist<min)
+				{
+					min=w.dist;
+					u=w;
+				}
+			}
+		}
+		foreach edge u to v : j
+		{
+			if(v.avail==1)
+			{
+				wt=weight(u,v);
+				if(u.dist+wt<v.dist)
+				{
+					v.dist=u.dist+wt;
+				}
+			}
+		}
+		u.avail=0;
+	}
+	foreach node u : i
+	{
+		printLn u.dist;
+	}
+}

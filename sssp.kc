@@ -1,16 +1,16 @@
 #sssp implementation.
 
 #function main.
-function main()
+function main(int argc)
 {
 	readGraph();
 	Node u,v,w;
 	int contn,wt,i,j;
-	foreach node u
+	foreach node u : i
 	{
 		u.dist=999999999;
 	}
-	w=0;
+	w=getNode(0);
 	w.dist=0;
 	contn=1;
 	while(contn==1)
@@ -29,7 +29,7 @@ function main()
 			}
 		}
 	}
-	foreach node u
+	foreach node u : i
 	{
 		printLn u.dist;
 	}

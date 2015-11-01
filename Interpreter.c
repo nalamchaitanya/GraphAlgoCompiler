@@ -6,9 +6,10 @@
 // Initial Output.
 char* outInit()
 {
-	char *temp =(char*)malloc(sizeof(char)*1000);
+	char *temp =(char*)malloc(sizeof(char)*100);
 	*temp='\0';
-	strcat(temp,"#include <stdio.h>\n#include \"Graph.h\"\n\n");
+	strcat(temp,"#include <stdio.h>\n#include \"Graph.c\"\n\n");
+	strcat(temp,"Graph *graph;\n\n");
 	return temp;
 }
 
@@ -25,6 +26,7 @@ char* forNodeClause(char* var1,char* var2,int tabCount)
 	char* temp=(char*)malloc(sizeof(char)*100);
 	*temp='\0';
 	char* tmp = (char*)malloc(sizeof(char)*50);
+	strcat(temp,giveTabs(tabCount));
 	sprintf(tmp,"for(%s=0;%s<graph->nodes;%s++)\n",var2,var2,var2);
 	strcat(temp,tmp);
 	strcat(temp,giveTabs(tabCount));
@@ -40,6 +42,7 @@ char* forEdgeClause(char* var1,char* var2,char* var3,int tabCount)
 	char* temp=(char*)malloc(sizeof(char)*100);
 	*temp='\0';
 	char* tmp = (char*)malloc(sizeof(char)*50);
+	strcat(temp,giveTabs(tabCount));
 	sprintf(tmp,"for(%s=0;%s<%s->length;%s++)\n",var3,var3,var1,var3);
 	strcat(temp,tmp);
 	strcat(temp,giveTabs(tabCount));
