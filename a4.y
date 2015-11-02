@@ -20,17 +20,17 @@
 	char* string;
 };
 
-%token GRAPH INT NODE;
-%token FORNODE FOREDGE IF;
-%token <string> VARIABLE PRINT PRINTLN LOGIC;
-%token TO WHILE FUNCTION;
-%token <string> ATTR COMP READGRAPH STRING ASITIS;
-%token <number> NUMBER;
-%type <string> program block fdecl;
-%type <string> params vdecl statements;
-%type <string> statement args varlist;
-%type <string> lval expr E EP T TP F printStmt;
-%type <string> cprog boolExprs boolExpr;
+%token GRAPH INT NODE
+%token FORNODE FOREDGE IF
+%token <string> VARIABLE PRINT PRINTLN LOGIC
+%token TO WHILE FUNCTION
+%token <string> ATTR COMP READGRAPH STRING ASITIS
+%token <number> NUMBER
+%type <string> program block fdecl
+%type <string> params vdecl statements
+%type <string> statement args varlist
+%type <string> lval expr E EP T TP F printStmt
+%type <string> cprog boolExprs boolExpr
 
 %%
 
@@ -40,7 +40,7 @@ cprog:
 
 program:
         block program               {
-                                        char* temp = (char*)malloc(sizeof(char)*10000);
+                                        char* temp = (char*)malloc(sizeof(char)*100000);
                                         *temp='\0';
                                         strcat(temp,$1);
                                         strcat(temp,$2);
@@ -53,7 +53,7 @@ program:
 
 block:
         FUNCTION fdecl {tabCount++;}'{' statements '}'{tabCount--;}   {
-                                                char *temp = (char*)malloc(sizeof(char)*1000);
+                                                char *temp = (char*)malloc(sizeof(char)*10000);
                                                 *temp ='\0';
                                                 strcat(temp,$2);
                                                 strcat(temp,"{\n");
@@ -100,14 +100,14 @@ params:
 
 vdecl:
         INT VARIABLE                    {
-                                            char *temp = (char*)malloc(sizeof(char)*20);
+                                            char *temp = (char*)malloc(sizeof(char)*10);
                                             *temp ='\0';
                                             strcat(temp,"int ");
                                             strcat(temp,$2);
                                             $$=temp;
                                         }
         | NODE VARIABLE                 {
-                                            char *temp = (char*)malloc(sizeof(char)*20);
+                                            char *temp = (char*)malloc(sizeof(char)*10);
                                             *temp ='\0';
                                             strcat(temp,"GNode* ");
                                             strcat(temp,$2);
@@ -117,7 +117,7 @@ vdecl:
 
 statements:
         statement statements        {
-                                        char *temp = (char*)malloc(sizeof(char)*2000);
+                                        char *temp = (char*)malloc(sizeof(char)*10000);
                                         *temp ='\0';
                                         strcat(temp,$1);
                                         strcat(temp,$2);
@@ -155,7 +155,7 @@ statement:
                                             $$=temp;
                                         }
             | FORNODE VARIABLE ':' VARIABLE {tabCount++;}'{' statements '}'{tabCount--;}  {
-                                                        char *temp = (char*)malloc(sizeof(char)*1000);
+                                                        char *temp = (char*)malloc(sizeof(char)*5000);
                                                         *temp ='\0';
                                                         strcat(temp,forNodeClause($2,$4,tabCount));
                                                         strcat(temp,$7);
@@ -164,7 +164,7 @@ statement:
                                                         $$=temp;
                                                     }
             | FOREDGE VARIABLE TO VARIABLE ':' VARIABLE {tabCount++;}'{' statements '}'{tabCount--;} {
-                                                        char *temp = (char*)malloc(sizeof(char)*1000);
+                                                        char *temp = (char*)malloc(sizeof(char)*5000);
                                                         *temp ='\0';
                                                         strcat(temp,forEdgeClause($2,$4,$6,tabCount));
                                                         strcat(temp,$9);
@@ -173,7 +173,7 @@ statement:
                                                         $$=temp;
                                                     }
             | IF '(' boolExprs ')' {tabCount++;}'{' statements '}'{tabCount--;}  {
-                                                        char *temp = (char*)malloc(sizeof(char)*1000);
+                                                        char *temp = (char*)malloc(sizeof(char)*2000);
                                                         *temp ='\0';
                                                         strcat(temp,giveTabs(tabCount));
                                                         strcat(temp,"if(");
@@ -187,7 +187,7 @@ statement:
                                                         $$=temp;
                                                     }
             | WHILE '(' boolExprs ')' {tabCount++;} '{' statements '}' {tabCount--;}  {
-                                                        char *temp = (char*)malloc(sizeof(char)*2000);
+                                                        char *temp = (char*)malloc(sizeof(char)*5000);
                                                         *temp ='\0';
                                                         strcat(temp,giveTabs(tabCount));
                                                         strcat(temp,"while(");
@@ -201,7 +201,7 @@ statement:
                                                         $$=temp;
                                                     }
             | printStmt ';'                 {
-                                                char *temp = (char*)malloc(sizeof(char)*30);
+                                                char *temp = (char*)malloc(sizeof(char)*100);
                                                 *temp ='\0';
                                                 strcat(temp,giveTabs(tabCount));
                                                 strcat(temp,$1);
@@ -210,7 +210,7 @@ statement:
                                             }
             | READGRAPH '(' ')' ';'         {$$="\tgraph = createGraph(argv[1]);\n";}
             | VARIABLE '(' args ')' ';'     {
-                                                char *temp = (char*)malloc(sizeof(char)*30);
+                                                char *temp = (char*)malloc(sizeof(char)*50);
                                                 *temp ='\0';
                                                 strcat(temp,giveTabs(tabCount));
                                                 strcat(temp,$1);
@@ -220,7 +220,7 @@ statement:
                                                 $$=temp;
                                             }
             | lval '=' VARIABLE '(' args ')' ';'     {
-                                                char *temp = (char*)malloc(sizeof(char)*30);
+                                                char *temp = (char*)malloc(sizeof(char)*50);
                                                 *temp ='\0';
                                                 strcat(temp,giveTabs(tabCount));
                                                 strcat(temp,$1);
@@ -242,7 +242,7 @@ statement:
 
 args:
     expr ',' args               {
-                                    char* temp = (char*)malloc(sizeof(char)*100);
+                                    char* temp = (char*)malloc(sizeof(char)*50);
                                     *temp='\0';
                                     strcat(temp,$1);
                                     strcat(temp,",");
@@ -295,7 +295,7 @@ lval:
                                         $$=temp;
                                     }
         | VARIABLE '.' ATTR         {
-                                        char* temp = (char*)malloc(sizeof(char)*50);
+                                        char* temp = (char*)malloc(sizeof(char)*20);
                                         *temp='\0';
                                         strcat(temp,$1);
                                         strcat(temp,"->");
@@ -359,7 +359,7 @@ TP:
                                     $$=temp;
                                 }
     | '/' F TP                  {
-                                    char* temp = (char*)malloc(sizeof(char)*10000);
+                                    char* temp = (char*)malloc(sizeof(char)*100);
                                     *temp='\0';
                                     strcat(temp,"/");
                                     strcat(temp,$2);

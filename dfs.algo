@@ -5,19 +5,18 @@
 @
 
 #DFS function.
-function DFS(Node u,int num)
+function DFS(Node u)
 {
 	Node v;
 	int i;
-	u.dfsnum = num;
+	u.dfsnum = 1;
 	printLn u.name;
 	# print "String has to be printed.";
 	foreach edge u to v : i
 	{
 		if(v.dfsnum==0)
 		{
-			num=num+1;
-			DFS(v,num);
+			DFS(v);
 		}
 	}
 }
@@ -33,5 +32,5 @@ function main(int argc)
 		u.dfsnum = 0;
 	}
 	u=getNode(0);
-	DFS(u,1);
+	DFS(u);
 }
