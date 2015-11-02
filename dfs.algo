@@ -1,4 +1,8 @@
 #dfs implementation
+@#include <stdio.h>
+@#include "Graph.c"
+@Graph *graph;
+@
 
 #DFS function.
 function DFS(Node u,int num)

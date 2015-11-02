@@ -24,7 +24,7 @@
 %token FORNODE FOREDGE IF;
 %token <string> VARIABLE PRINT PRINTLN LOGIC;
 %token TO WHILE FUNCTION;
-%token <string> ATTR COMP READGRAPH STRING;
+%token <string> ATTR COMP READGRAPH STRING ASITIS;
 %token <number> NUMBER;
 %type <string> program block fdecl;
 %type <string> params vdecl statements;
@@ -61,6 +61,11 @@ block:
                                                 strcat(temp,"}\n");
                                                 $$=temp;
                                             }
+        | ASITIS                    {
+                                        $$=$1;
+                                    }
+        ;
+
 
 fdecl:
         VARIABLE '(' params ')'         {
@@ -224,6 +229,13 @@ statement:
                                                 strcat(temp,"(");
                                                 strcat(temp,$5);
                                                 strcat(temp,");\n");
+                                                $$=temp;
+                                            }
+            | ASITIS                        {
+                                                char *temp = (char*)malloc(sizeof(char)*50);
+                                                *temp ='\0';
+                                                strcat(temp,giveTabs(tabCount));
+                                                strcat(temp,$1);
                                                 $$=temp;
                                             }
             ;
@@ -454,7 +466,6 @@ int main(int argc,char *argv[])
 {
 	str =(char*)malloc(sizeof(char)*10000);
     *str='\0';
-    strcat(str,outInit());
     tabCount=0;
 	yyparse();
     printf("%s",str);

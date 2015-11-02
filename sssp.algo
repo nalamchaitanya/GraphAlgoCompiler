@@ -1,4 +1,8 @@
 #sssp implementation.
+@#include <stdio.h>
+@#include "Graph.c"
+@Graph *graph;
+@
 
 #function main.
 function main(int argc)

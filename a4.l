@@ -59,6 +59,8 @@ digit   [0-9]
 
 ({letter}({letter}|{digit})*)   {yylval.string = strdup(yytext);return VARIABLE;}
 
+[@]([^\n])*[\n]  {yytext++;yylval.string = strdup(yytext);return ASITIS;}
+
 [#]([^\n])*[\n]  {;}
 
 ("+"|"-"|"*"|"/"|"{"|"}")   {return *yytext;}

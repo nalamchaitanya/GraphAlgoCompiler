@@ -27,7 +27,7 @@ test: a.out
 	bash eval.sh ./a.out testcases
 
 clean:
-	@rm lex.yy.c y.output y.tab.h y.tab.c a.out *.o
+	@rm lex.yy.c y.output y.tab.h y.tab.c *.out *.o
 
 tar:
 	@mv a.out /tmp/

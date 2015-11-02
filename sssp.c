@@ -1,6 +1,5 @@
 #include <stdio.h>
 #include "Graph.c"
-
 Graph *graph;
 
 void main(int argc,char** argv)

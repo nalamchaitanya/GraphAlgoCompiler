@@ -1,6 +1,5 @@
 #include <stdio.h>
 #include "Graph.c"
-
 Graph *graph;
 
 void main(int argc,char** argv)
@@ -43,7 +42,7 @@ void main(int argc,char** argv)
 			}
 		}
 		u->avail=0;
-		i=i+1;
+		i++;
 	}
 	for(i=0;i<graph->nodes;i++)
 	{

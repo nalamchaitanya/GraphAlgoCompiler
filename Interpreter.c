@@ -9,7 +9,6 @@ char* outInit()
 	char *temp =(char*)malloc(sizeof(char)*100);
 	*temp='\0';
 	strcat(temp,"#include <stdio.h>\n#include \"Graph.c\"\n\n");
-	strcat(temp,"Graph *graph;\n\n");
 	return temp;
 }
 
@@ -55,8 +54,6 @@ char* forEdgeClause(char* var1,char* var2,char* var3,int tabCount)
 
 char* readGraphClause(int tabCount)
 {
-	if(tabCount!=1)
-		printf("There's something wrong.\n");
 	char* temp=(char*)malloc(sizeof(char)*100);
 	*temp='\0';
 	strcat(temp,giveTabs(tabCount));
