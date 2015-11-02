@@ -40,6 +40,11 @@ digit   [0-9]
 
 ("function")    {return FUNCTION;}
 
+("&&"|"||")                     {
+                                    yylval.string = strdup(yytext);
+                                    return LOGIC;
+                                }
+
 ("<"|">"|"<="|">="|"=="|"!=")   {
                                     yylval.string = strdup(yytext);
                                     return COMP;

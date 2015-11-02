@@ -22,12 +22,15 @@
 
 %token GRAPH INT NODE;
 %token FORNODE FOREDGE IF;
-%token <string> VARIABLE PRINT PRINTLN;
+%token <string> VARIABLE PRINT PRINTLN LOGIC;
 %token TO WHILE FUNCTION;
 %token <string> ATTR COMP READGRAPH STRING;
 %token <number> NUMBER;
-%type <string> program block fdecl params vdecl statements statement args varlist lval expr E EP T TP F boolExpr printStmt;
-%type <string> cprog;
+%type <string> program block fdecl;
+%type <string> params vdecl statements;
+%type <string> statement args varlist;
+%type <string> lval expr E EP T TP F printStmt;
+%type <string> cprog boolExprs boolExpr;
 
 %%
 
@@ -164,7 +167,7 @@ statement:
                                                         strcat(temp,"}\n");
                                                         $$=temp;
                                                     }
-            | IF '(' boolExpr ')' {tabCount++;}'{' statements '}'{tabCount--;}  {
+            | IF '(' boolExprs ')' {tabCount++;}'{' statements '}'{tabCount--;}  {
                                                         char *temp = (char*)malloc(sizeof(char)*1000);
                                                         *temp ='\0';
                                                         strcat(temp,giveTabs(tabCount));
@@ -178,7 +181,7 @@ statement:
                                                         strcat(temp,"}\n");
                                                         $$=temp;
                                                     }
-            | WHILE '(' boolExpr ')' {tabCount++;} '{' statements '}' {tabCount--;}  {
+            | WHILE '(' boolExprs ')' {tabCount++;} '{' statements '}' {tabCount--;}  {
                                                         char *temp = (char*)malloc(sizeof(char)*2000);
                                                         *temp ='\0';
                                                         strcat(temp,giveTabs(tabCount));
@@ -373,6 +376,27 @@ F:
                                 }
     ;
 
+boolExprs:
+    boolExpr LOGIC boolExprs    {
+                                    char* temp = (char*)malloc(sizeof(char)*200);
+                                    *temp='\0';
+                                    strcat(temp,$1);
+                                    strcat(temp,$2);
+                                    strcat(temp,$3);
+                                    $$=temp;
+                                }
+    | boolExpr                  {
+                                    $$=$1;
+                                }
+    | '(' boolExprs ')'         {
+                                    char* temp = (char*)malloc(sizeof(char)*200);
+                                    *temp='\0';
+                                    strcat(temp,"(");
+                                    strcat(temp,$2);
+                                    strcat(temp,")");
+                                    $$=temp;
+                                }
+    ;
 boolExpr:
     expr COMP expr              {
                                     char* temp = (char*)malloc(sizeof(char)*100);
