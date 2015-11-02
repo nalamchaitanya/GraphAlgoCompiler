@@ -25,7 +25,7 @@ void main(int argc,char** argv)
 			for(j=0;j<u->length;j++)
 			{
 				v=u->neighbours[j];
-				wt=weight(u,v);
+				wt=weight(u,j);
 				if(u->dist+wt<v->dist)
 				{
 					v->dist=u->dist+wt;

@@ -20,7 +20,7 @@ function main(int argc)
 		{
 			foreach edge u to v : j
 			{
-				wt=weight(u,v);
+				wt=weight(u,j);
 				if(u.dist+wt<v.dist)
 				{
 					v.dist=u.dist+wt;

@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include "Graph.h"
+#define LIM 1000
 
 extern Graph *graph;
 
@@ -30,6 +31,12 @@ Graph* createGraph(char* file)
 //Add a new Edge to graph
 void addEdge(GNode* node1,GNode* node2,Graph* graph,int wt)
 {
+	if(node1->length>=node1->check)
+	{
+		node1->check=node1->check+LIM;
+		node1->neighbours=(GNode**)realloc(node1->neighbours,sizeof(GNode*)*(node1->check));
+		node1->weights=(int*)realloc(node1->weights,sizeof(int)*(node1->check));
+	}
 	node1->neighbours[node1->length]=node2;
 	node1->weights[node1->length]=wt;
 	node1->length++;
@@ -41,15 +48,15 @@ GNode* createNode(int name,int n,int m,Graph *graph)
 	GNode* node;
 	node = graph->arr+name;
 	node->name = name;
-	node->neighbours = (GNode**)malloc(sizeof(GNode*)*(m/2));
-	node->weights=(int*)malloc(sizeof(int)*(m/2));
+	node->check = LIM;
+	node->neighbours = (GNode**)malloc(sizeof(GNode*)*(node->check));
+	node->weights=(int*)malloc(sizeof(int)*(node->check));
 	node->length = 0;
-	node->check = 0;
 	return node;
 	// graph->index++;
 }
 
-void print(Graph *graph)
+void printGraph(Graph *graph)
 {
 	int i,j;
 	for(i=0;i<graph->nodes;i++)
@@ -65,25 +72,19 @@ void print(Graph *graph)
 }
 
 // gives weight between two nodes having edge.
-int weight(GNode *src,GNode *dst)
+int weight(GNode *src,int dst)
 {
-	int i,j;
-	for(i=0;i<src->length;i++)
-	{
-		if(dst->name==src->neighbours[i]->name)
-			return src->weights[i];
-	}
-	return -1;
+	return src->weights[dst];
 }
 
 // gives no of nodes in graph.
-int nodeCount()
+int nodeCount(int c)
 {
 	return graph->nodes;
 }
 
 // gives no of edges in graph.
-int edgeCount()
+int edgeCount(int c)
 {
 	return graph->edges;
 }

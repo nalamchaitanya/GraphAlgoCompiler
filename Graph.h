@@ -40,31 +40,19 @@ GNode* getNode(int name);
 //Add a new Node to graph
 void addEdge(GNode* node1,GNode* node2,Graph* graph,int wt);
 
-//Check whether a name in Array
-GNode* checkInArray(Graph *graph,char *name);
-
-//Check whether a name in neighbours.
-GNode* checkInNeigh(GNode *node,char *name);
-
 //Create a node.
 GNode* createNode(int name,int n,int m,Graph *graph);
 
 //Prints the graph.
 void printGraph(Graph *graph);
 
-//checks is Relation or not.
-int isRelation(Graph *graph,char *name1,char *name2);
-
-// constructs string to put in table.
-char* constructStr(char *name1,char *relation,char *name2);
-
 // gives weight between two nodes having edge.
-int weight(GNode *src,GNode *dst);
+int weight(GNode *src,int dst);
 
 // gives no of nodes in graph.
-int nodeCount();
+int nodeCount(int c);
 
 // gives no of edges in graph.
-int edgeCount();
+int edgeCount(int c);
 
 #endif
